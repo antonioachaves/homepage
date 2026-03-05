@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Antonio A. Chaves — UNIFESP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy:     #1a2540;
+      --navy-mid: #243156;
+      --blue:     #2c5282;
+      --accent:   #4a7fb5;
+      --silver:   #8fa8c8;
+      --mist:     #dce8f4;
+      --fog:      #f0f5fb;
+      --white:    #ffffff;
+      --text:     #1e2d42;
+      --muted:    #5a7090;
+      --border:   #c9d9ec;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.7;
+    }
+
+    /* ── HEADER ─────────────────────────────────── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26, 37, 64, 0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(74,127,181,0.25);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-brand span { color: var(--silver); font-weight: 300; }
+
+    nav a {
+      color: rgba(220,232,244,0.75);
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-left: 2rem;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--white); }
+
+    /* ── HERO ────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 55%, #1e3a5f 100%);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%; right: -10%;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74,127,181,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 5%; left: -5%;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(44,82,130,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* subtle grid texture */
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(74,127,181,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74,127,181,0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      padding-top: 80px;
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    .hero-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-label::before {
+      content: '';
+      display: block;
+      width: 32px; height: 1px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--silver);
+    }
+
+    .hero-title {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-bio {
+      color: rgba(220,232,244,0.78);
+      font-size: 0.97rem;
+      line-height: 1.85;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      padding: 0.3rem 0.85rem;
+      border: 1px solid rgba(74,127,181,0.45);
+      border-radius: 2px;
+      color: var(--silver);
+      text-transform: uppercase;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-primary {
+      padding: 0.75rem 1.75rem;
+      background: var(--accent);
+      color: var(--white);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #3d6fa3; transform: translateY(-1px); }
+
+    .btn-ghost {
+      padding: 0.75rem 1.75rem;
+      border: 1px solid rgba(74,127,181,0.5);
+      color: var(--silver);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--white); }
+
+    /* hero card */
+    .hero-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(74,127,181,0.2);
+      border-radius: 4px;
+      padding: 2rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-card .photo {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      background: var(--navy-mid);
+      border: 2px solid rgba(74,127,181,0.35);
+      margin: 0 auto 1.5rem;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem;
+      color: var(--silver);
+      overflow: hidden;
+    }
+
+    .hero-card .photo img { width: 100%; height: 100%; object-fit: cover; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(74,127,181,0.2);
+      border: 1px solid rgba(74,127,181,0.2);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 1.25rem;
+    }
+
+    .stat {
+      background: rgba(26,37,64,0.6);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: var(--white);
+      display: block;
+      line-height: 1;
+    }
+
+    .stat-l {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-top: 0.3rem;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .hero-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      color: rgba(220,232,244,0.65);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .hero-link:hover { color: var(--silver); }
+    .hero-link svg { flex-shrink: 0; opacity: 0.6; }
+
+    /* ── SECTIONS COMMON ─────────────────────────── */
+    section { padding: 5rem 2rem; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--accent);
+      display: block;
+    }
+
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      font-weight: 300;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── RESEARCH ────────────────────────────────── */
+    #research { background: var(--fog); }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .research-card {
+      background: var(--white);
+      padding: 2rem 1.75rem;
+      transition: background 0.2s;
+    }
+    .research-card:hover { background: var(--fog); }
+
+    .r-icon {
+      width: 40px; height: 40px;
+      background: var(--mist);
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+      color: var(--blue);
+    }
+
+    .r-icon svg { width: 20px; height: 20px; }
+
+    .research-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 0.6rem;
+    }
+
+    .research-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ── PUBLICATIONS ────────────────────────────── */
+    #publications { background: var(--white); }
+
+    .pub-list { display: flex; flex-direction: column; gap: 0; }
+
+    .pub-item {
+      display: grid;
+      grid-template-columns: 60px 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .pub-item:first-child { border-top: 1px solid var(--border); }
+
+    .pub-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--silver);
+      padding-top: 0.15rem;
+    }
+
+    .pub-title {
+      font-size: 0.92rem;
+      color: var(--navy);
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+      line-height: 1.5;
+    }
+
+    .pub-meta {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .pub-tags {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .pub-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.6rem;
+      background: var(--mist);
+      color: var(--blue);
+      border-radius: 2px;
+    }
+
+    .pub-link {
+      font-size: 0.72rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      padding-top: 0.2rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .pub-link:hover { border-color: var(--accent); }
+
+    .view-all {
+      margin-top: 2.5rem;
+      text-align: center;
+    }
+
+    /* ── TEACHING ────────────────────────────────── */
+    #teaching { background: var(--fog); }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .course-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.75rem;
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    .course-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--mist);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 48px;
+    }
+
+    .course-card h3 {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 0.35rem;
+    }
+
+    .course-card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .course-level {
+      display: inline-block;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.55rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 2px;
+      margin-top: 0.6rem;
+    }
+
+    /* ── CONTACT ─────────────────────────────────── */
+    #contact {
+      background: var(--navy);
+    }
+
+    #contact .section-label { color: var(--silver); }
+    #contact .section-label::before { background: var(--silver); }
+    #contact .section-heading { color: var(--white); }
+    #contact .section-sub { color: rgba(220,232,244,0.6); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1.75rem;
+    }
+
+    .contact-icon {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(74,127,181,0.3);
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--silver);
+      flex-shrink: 0;
+    }
+
+    .contact-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-value {
+      font-size: 0.88rem;
+      color: rgba(220,232,244,0.8);
+    }
+
+    .contact-value a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .contact-value a:hover { border-color: var(--accent); }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer {
+      background: #111b2e;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(143,168,200,0.45);
+      letter-spacing: 0.06em;
+    }
+
+    footer a { color: rgba(143,168,200,0.6); text-decoration: none; }
+
+    /* ── ANIMATIONS ──────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-label   { animation: fadeUp 0.7s ease both; animation-delay: 0.1s; }
+    .hero h1      { animation: fadeUp 0.7s ease both; animation-delay: 0.2s; }
+    .hero-title   { animation: fadeUp 0.7s ease both; animation-delay: 0.3s; }
+    .hero-bio     { animation: fadeUp 0.7s ease both; animation-delay: 0.4s; }
+    .hero-tags    { animation: fadeUp 0.7s ease both; animation-delay: 0.5s; }
+    .hero-cta     { animation: fadeUp 0.7s ease both; animation-delay: 0.6s; }
+    .hero-card    { animation: fadeUp 0.8s ease both; animation-delay: 0.35s; }
+
+    /* ── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-card  { display: none; }
+      .research-grid { grid-template-columns: 1fr 1fr; }
+      .course-grid   { grid-template-columns: 1fr; }
+      .contact-grid  { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 560px) {
+      .research-grid { grid-template-columns: 1fr; }
+      nav a { display: none; }
+      nav a:last-child { display: inline; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="nav-inner">
+      <a class="nav-brand" href="#home">A. A. Chaves <span>/ UNIFESP</span></a>
+      <nav>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="hero-label">Professor · UNIFESP · São José dos Campos</div>
+        <h1>Antonio A.<br><em>Chaves</em></h1>
+        <p class="hero-title">Institute of Science and Technology &nbsp;·&nbsp; Federal University of São Paulo</p>
+        <p class="hero-bio">
+          My research focuses on the design and analysis of metaheuristic algorithms for combinatorial optimization problems. I develop hybrid methods — combining metaheuristics, local search, and machine learning components — applied to logistics, routing, and scheduling problems.
+        </p>
+        <div class="hero-tags">
+          <span class="tag">Metaheuristics</span>
+          <span class="tag">RKO</span>
+          <span class="tag">Combinatorial Optimization</span>
+          
+        </div>
+        <div class="hero-cta">
+          <a href="#publications" class="btn-primary">View Publications</a>
+          <a href="cv.pdf" class="btn-ghost">Download CV</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="photo">
+          <!-- Replace src with your actual photo -->
+          <img src="Foto.png" alt="Antonio A. Chaves">
+        </div>
+        <div class="stat-grid">
+          <div class="stat">
+            <span class="stat-n">80+</span>
+            <div class="stat-l">Publications</div>
+          </div>
+          <div class="stat">
+            <span class="stat-n">1k+</span>
+            <div class="stat-l">Citations</div>
+          </div>
+          <div class="stat">
+            <span class="stat-n">15+</span>
+            <div class="stat-l">Years Active</div>
+          </div>
+          <div class="stat">
+            <span class="stat-n">18 h-index</span>
+            <div class="stat-l">Scopus</div>
+          </div>
+        </div>
+        <div class="hero-links">
+          <a href="https://scholar.google.com" class="hero-link" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-24L0 9.5h3.6v10.4h4.3v-6.2h8.2v6.2h4.3V9.5H24L12 0z"/></svg>
+            Google Scholar
+          </a>
+          <a href="http://lattes.cnpq.br/" class="hero-link" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            Lattes CV
+          </a>
+          <a href="https://orcid.org" class="hero-link" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm-1.731 5.172c.6 0 1.086.486 1.086 1.085s-.486 1.086-1.086 1.086c-.599 0-1.085-.487-1.085-1.086s.486-1.085 1.085-1.085zm-.543 3.67h1.086v9.501H9.726v-9.5zm4.09 0h2.957c2.814 0 4.007 2.015 4.007 4.75 0 2.735-1.193 4.75-4.007 4.75h-2.957V8.843zm1.085.971v7.558h1.743c2.1 0 3.007-1.593 3.007-3.779 0-2.186-.907-3.779-3.007-3.779h-1.743z"/></svg>
+            ORCID
+          </a>
+          <a href="https://www.unifesp.br" class="hero-link" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            UNIFESP · ICT
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="container">
+      <div class="section-label">Lines of Research</div>
+      <h2 class="section-heading">Research Areas</h2>
+      <p class="section-sub">Developing efficient algorithms that solve hard combinatorial problems by combining metaheuristic strategies with mathematical programming.</p>
+
+      <div class="research-grid">
+        <div class="research-card">
+          <div class="r-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M3 12h3M18 12h3M12 3v3M12 18v3"/><path d="M6.3 6.3l2.1 2.1M15.6 15.6l2.1 2.1M6.3 17.7l2.1-2.1M15.6 8.4l2.1-2.1"/></svg>
+          </div>
+          <h3>Metaheuristic Design</h3>
+          <p>Development of population-based and trajectory methods, including BRKGA, GRASP, VNS, and ILS frameworks, with theoretical convergence analysis.</p>
+        </div>
+
+        <div class="research-card">
+          <div class="r-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6 8l6 8M18 8l-6 8"/></svg>
+          </div>
+          <h3>Vehicle Routing Problems</h3>
+          <p>Exact and heuristic approaches for VRP variants (CVRP, VRPTW, MDVRP), incorporating real-world constraints from logistics and supply-chain contexts.</p>
+        </div>
+
+        <div class="research-card">
+          <div class="r-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <h3>Hybrid Methods</h3>
+          <p>Integration of metaheuristics with integer programming, constraint programming, and machine learning to enhance solution quality and scalability.</p>
+        </div>
+
+        <div class="research-card">
+          <div class="r-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h3>Scheduling & Planning</h3>
+          <p>Optimization of production scheduling, project management, and resource allocation under uncertainty, with applications to healthcare and manufacturing.</p>
+        </div>
+
+        <div class="research-card">
+          <div class="r-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 010 18M3 12h18"/><path d="M12 3c-2.5 2.5-4 5.5-4 9s1.5 6.5 4 9"/></svg>
+          </div>
+          <h3>BRKGA Framework</h3>
+          <p>Theoretical foundations and practical extensions of the Biased Random-Key Genetic Algorithm, including multi-population variants and decoder design.</p>
+        </div>
+
+        <div class="research-card">
+          <div class="r-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg>
+          </div>
+          <h3>Clustering & Partitioning</h3>
+          <p>Graph partitioning, p-median problems, and data clustering formulated as integer programs and solved with specialized metaheuristic approaches.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="container">
+      <div class="section-label">Selected Works</div>
+      <h2 class="section-heading">Recent Publications</h2>
+      <p class="section-sub">Peer-reviewed articles in international journals. For the complete list, visit Google Scholar or the Lattes platform.</p>
+
+      <div class="pub-list">
+
+        <div class="pub-item">
+          <div class="pub-year">2024</div>
+          <div>
+            <div class="pub-title">A BRKGA-based matheuristic for the maximum quasi-clique problem with an exact local search strategy</div>
+            <div class="pub-meta">A. A. Chaves, L. F. Morán-Mirabal, E. G. Talbi &nbsp;·&nbsp; <em>Computers &amp; Operations Research</em></div>
+            <div class="pub-tags"><span class="pub-tag">BRKGA</span><span class="pub-tag">Graph</span><span class="pub-tag">Matheuristic</span></div>
+          </div>
+          <a href="#" class="pub-link">DOI ↗</a>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-year">2023</div>
+          <div>
+            <div class="pub-title">Hybrid metaheuristic and machine learning for the multiple vehicle routing problem with stochastic demands</div>
+            <div class="pub-meta">A. A. Chaves et al. &nbsp;·&nbsp; <em>European Journal of Operational Research</em></div>
+            <div class="pub-tags"><span class="pub-tag">VRP</span><span class="pub-tag">ML</span><span class="pub-tag">Stochastic</span></div>
+          </div>
+          <a href="#" class="pub-link">DOI ↗</a>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-year">2022</div>
+          <div>
+            <div class="pub-title">An improved BRKGA for the traveling thief problem</div>
+            <div class="pub-meta">A. A. Chaves, R. Martins &nbsp;·&nbsp; <em>Optimization Letters</em></div>
+            <div class="pub-tags"><span class="pub-tag">BRKGA</span><span class="pub-tag">Combinatorial</span></div>
+          </div>
+          <a href="#" class="pub-link">DOI ↗</a>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-year">2021</div>
+          <div>
+            <div class="pub-title">Clustering Search metaheuristic for the capacitated p-median problem</div>
+            <div class="pub-meta">A. A. Chaves, L. A. N. Lorena &nbsp;·&nbsp; <em>Expert Systems with Applications</em></div>
+            <div class="pub-tags"><span class="pub-tag">Clustering</span><span class="pub-tag">p-median</span></div>
+          </div>
+          <a href="#" class="pub-link">DOI ↗</a>
+        </div>
+
+        <div class="pub-item">
+          <div class="pub-year">2020</div>
+          <div>
+            <div class="pub-title">A hybrid metaheuristic for the unrelated parallel machine scheduling problem</div>
+            <div class="pub-meta">A. A. Chaves, J. F. Gonçalves, M. G. C. Resende &nbsp;·&nbsp; <em>Journal of Heuristics</em></div>
+            <div class="pub-tags"><span class="pub-tag">Scheduling</span><span class="pub-tag">BRKGA</span></div>
+          </div>
+          <a href="#" class="pub-link">DOI ↗</a>
+        </div>
+
+      </div>
+
+      <div class="view-all">
+        <a href="https://scholar.google.com" class="btn-primary" target="_blank">View All on Google Scholar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEACHING -->
+  <section id="teaching">
+    <div class="container">
+      <div class="section-label">Courses</div>
+      <h2 class="section-heading">Teaching</h2>
+      <p class="section-sub">Undergraduate and graduate courses offered at UNIFESP's Institute of Science and Technology.</p>
+
+      <div class="course-grid">
+        <div class="course-card">
+          <div class="course-num">01</div>
+          <div>
+            <h3>Metaheuristics</h3>
+            <p>Design and analysis of metaheuristic algorithms for combinatorial optimization, covering GRASP, VNS, Simulated Annealing, Genetic Algorithms, and BRKGA.</p>
+            <span class="course-level">Graduate</span>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-num">02</div>
+          <div>
+            <h3>Operations Research</h3>
+            <p>Linear programming, integer programming, and network flow problems. Modeling and computational tools for real-world optimization.</p>
+            <span class="course-level">Undergraduate</span>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-num">03</div>
+          <div>
+            <h3>Algorithms &amp; Data Structures</h3>
+            <p>Fundamental algorithms, complexity theory, and data structure design for efficient computation.</p>
+            <span class="course-level">Undergraduate</span>
+          </div>
+        </div>
+        <div class="course-card">
+          <div class="course-num">04</div>
+          <div>
+            <h3>Computational Intelligence</h3>
+            <p>Evolutionary computation, swarm intelligence, and hybrid intelligent systems with applications to engineering problems.</p>
+            <span class="course-level">Graduate</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-label">Get in Touch</div>
+      <h2 class="section-heading">Contact</h2>
+      <p class="section-sub">I welcome collaborations, questions about my research, and prospective graduate students.</p>
+
+      <div class="contact-grid">
+        <div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value"><a href="mailto:antonio.chaves@unifesp.br">antonio.chaves@unifesp.br</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">Institution</div>
+              <div class="contact-value">UNIFESP — Instituto de Ciência e Tecnologia<br>São José dos Campos, SP, Brazil</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">Office</div>
+              <div class="contact-value">Room — Building, ICT-UNIFESP<br>Av. Cesare Mansueto Giulio Lattes, 1201</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm-1.731 5.172c.6 0 1.086.486 1.086 1.085s-.486 1.086-1.086 1.086c-.599 0-1.085-.487-1.085-1.086s.486-1.085 1.085-1.085zm-.543 3.67h1.086v9.501H9.726v-9.5z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">ORCID</div>
+              <div class="contact-value"><a href="https://orcid.org" target="_blank">0000-0000-0000-0000</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 110-14 7 7 0 010 14zm0-24L0 9.5h3.6v10.4h4.3v-6.2h8.2v6.2h4.3V9.5H24L12 0z"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">Google Scholar</div>
+              <div class="contact-value"><a href="https://scholar.google.com" target="_blank">View Profile</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <div>
+              <div class="contact-label">CNPq Lattes</div>
+              <div class="contact-value"><a href="http://lattes.cnpq.br/" target="_blank">Currículo Lattes</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Antonio A. Chaves &nbsp;·&nbsp; UNIFESP — Instituto de Ciência e Tecnologia &nbsp;·&nbsp; <a href="mailto:antonio.chaves@unifesp.br">antonio.chaves@unifesp.br</a></p>
+  </footer>
+
+</body>
+</html>
