@@ -345,6 +345,82 @@
       margin-bottom: 3rem;
     }
 
+    /* ── PROFESSIONAL HISTORY ────────────────────── */
+    #history { background: var(--white); }
+    
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    
+    .tl-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+      padding: 2rem 0 2rem 2rem;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .tl-item:last-child { border-bottom: none; }
+    
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -5px; top: 2.4rem;
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 1px var(--accent);
+    }
+    
+    .tl-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      color: var(--silver);
+      padding-top: 0.15rem;
+      white-space: nowrap;
+    }
+    
+    .tl-role {
+      font-size: 0.97rem;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+    
+    .tl-org {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    
+    .tl-subs {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .tl-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding-left: 1rem;
+      border-left: 2px solid var(--mist);
+      line-height: 1.6;
+    }
+    
+    .tl-sub-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.1rem;
+    }
+
     /* ── RESEARCH ────────────────────────────────── */
     #research { background: var(--fog); }
 
@@ -617,6 +693,7 @@
     <div class="nav-inner">
       <a class="nav-brand" href="#home">A. A. Chaves <span>/ UNIFESP</span></a>
       <nav>
+        <a href="#history">History</a>
         <a href="#research">Research</a>
         <a href="#publications">Publications</a>
         <a href="#teaching">Teaching</a>
@@ -689,6 +766,52 @@
             UNIFESP · ICT
           </a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFESSIONAL HISTORY -->
+  <section id="history">
+    <div class="container">
+      <div class="section-label">Career</div>
+      <h2 class="section-heading">Professional History</h2>
+  
+      <div class="timeline">
+  
+        <div class="tl-item">
+          <div class="tl-date">2025 — Present</div>
+          <div class="tl-body">
+            <div class="tl-role">Editor-in-Chief</div>
+            <div class="tl-org">Pesquisa Operacional (POpe) Journal</div>
+          </div>
+        </div>
+  
+        <div class="tl-item">
+          <div class="tl-date">2011 — Present</div>
+          <div class="tl-body">
+            <div class="tl-role">Associate Professor</div>
+            <div class="tl-org">Universidade Federal de São Paulo — UNIFESP</div>
+            <div class="tl-subs">
+              <div class="tl-sub">
+                <span class="tl-sub-date">2023 – 2027</span>
+                Coordinator of the Graduate and Research Chamber
+              </div>
+              <div class="tl-sub">
+                <span class="tl-sub-date">2018 – 2021</span>
+                Coordinator of the Postgraduate Program in Operational Research (UNIFESP / ITA)
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="tl-item">
+          <div class="tl-date">2009 — 2011</div>
+          <div class="tl-body">
+            <div class="tl-role">Assistant Professor</div>
+            <div class="tl-org">Universidade Estadual Paulista — UNESP</div>
+          </div>
+        </div>
+  
       </div>
     </div>
   </section>
