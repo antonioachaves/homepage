@@ -673,7 +673,12 @@
     /* ── RESPONSIVE ──────────────────────────────── */
     @media (max-width: 860px) {
       .hero-inner { grid-template-columns: 1fr; }
-      .hero-card  { display: none; }
+      /* .hero-card  { display: none; } */
+      .hero-card {
+        display: block;
+        max-width: 380px;
+        margin: 0 auto;
+      }
       .research-grid { grid-template-columns: 1fr 1fr; }
       .course-grid   { grid-template-columns: 1fr; }
       .contact-grid  { grid-template-columns: 1fr; gap: 2rem; }
